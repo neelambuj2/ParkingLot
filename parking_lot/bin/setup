@@ -1,0 +1,26 @@
+# Add script to:
+# * Install dependencies
+# * Build/Compile
+# * Run unit Test Suit to validate
+# * Run file by giving input file
+# * Run ruby test suite
+# After this is run, bin/parking_lot
+# should Just Work.
+#!/bin/bash
+sudo apt update
+sudo apt-get update
+sudo apt install python3
+python3 -m unittest
+chmod +x bin/parking_lot
+echo "Starting the program by executing bin/parking_lot and giving a file input"
+bin/parking_lot functional_spec/fixtures/file_input.txt
+sudo apt-get install ruby-full
+cd functional_spec
+sudo gem install diff-lcs -v 1.3 --source 'https://rubygems.org/'
+sudo gem install rspec-core -v 3.7.1 --source 'https://rubygems.org/'
+sudo gem install bundler -v 1.16.2
+bundle install
+cd ..
+chmod +x bin/run_functional_tests
+echo "starting Ruby Test suite"
+bin/run_functional_tests
